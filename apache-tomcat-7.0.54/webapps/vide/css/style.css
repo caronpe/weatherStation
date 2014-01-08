@@ -1,0 +1,190 @@
+body {
+	font-family: 'Lucida Grande';
+	background:#ffffff;
+	background: url("../img/pattern.jpg");	
+	padding:0;
+	margin:0;
+}
+
+a{
+	/* pas de soulignement */
+	text-decoration:none;
+	/* couleur du lien */
+	color:/*#a7a7c4*/#242526;
+}
+a:hover{
+	text-decoration: underline;
+	color:/*#b8b8d0*/gray;
+
+}
+header {
+	background: #999999;
+	width: auto;
+	margin:0;
+	padding:0;
+	margin-top: -9px;
+}
+	#topmenu {
+		position:relative;
+		padding: 0;
+		height:auto;
+		top:-4px;
+		border-bottom: 1px solid /*#c4c4c4*/gray;
+		border-top: 1px solid /*#c4c4c4*/gray;
+		background: /*#f4f2f0*/#121314;
+		font-size: 18px;
+		font:Classic;
+		line-height: 60px;
+	}
+		#topmenu a{
+			position: relative;
+			display: inline-block; 
+			text-align:center;
+			margin-left: 1%;
+			margin-right: 1%;
+			text-decoration: none;
+			width: 17%;
+			height:60px;
+			color:/*#8a8aae*/silver;
+			font-weight:bold;
+		}
+		#topmenu a:hover {
+			color:/*#8a8aae*/silver;
+			font-weight:bold;
+			background-color:/*#f9f9f9*/#222222;
+			/* arrondis des angles */
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+		}
+		#topmenu a:active{
+			height:59px;
+			/* arrondis des angles*/
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			/* ombre intérieure */
+			-webkit-box-shadow: inset 0px 0px 6px 2px /*#b7b7bf*/silver;
+			box-shadow: inset 0px 0px 6px 2px /*#b7b7bf*/silver;
+		}
+		
+#content {
+	position: relative;
+	top: 75px;
+	background: #f7f7f7;
+	/*moche :*/
+	/*border: 1px solid #000000;*/
+	height: auto;
+	width: 75%;
+	margin-left: 15%;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	/* arrondis en haut à gauche puis en en haut à droite*/
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	/* ombres */
+	-webkit-box-shadow: 0px 0px 3px 2px #9292ab;
+	box-shadow: 0px 0px 3px 2px #9292ab;
+
+}
+	/* titre du bloc content*/
+	#content_title {
+		/* Gestion de la couleur */
+		/* De base, au cas le navigateur ne serait pas faire le dégradé */
+		background: #62627b;
+		/* Gestion du dégradé */
+		/* va de #8a8aae (en haut) à #62627b (en bas) en passant par #777896 */
+		/* moz-linear... > mozilla firefox */
+		background: -moz-linear-gradient(top, #363840 0%, #474A4E 44%, #595A5E 100%); 
+		/*webkit >>> safari, chrome et opera */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#363840), color-stop(44%,#474A4E), color-stop(100%,#595A5E)); 
+		background: -webkit-linear-gradient(top, #363840 0%,#474A4E 44%,#595A5E 100%); 
+		background: -o-linear-gradient(top, #363840 0%,#474A4E 44%,#595A5E 100%); 
+		/*Internet Explorer 10 */
+		background: -ms-linear-gradient(top, #363840 0%,#474A4E 44%,#595A5E 100%); 
+		/* Norme W3C */
+		background: linear-gradient(to bottom, #363840 0%,#474A4E 44%,#595A5E 100%);
+		/* Internet Explorer versions 6 à 9*/ 
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363840', endColorstr='#595A5E',GradientType=0 );
+		width: auto;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-indent: 15px;
+		font-weight : bold;
+		font-size: 22px;
+		color: white;
+		/*bordure blanche :D */
+		border-bottom: 1px solid #ffffff;
+		/* arrondis en haut à gauche puis en en haut à droite*/
+		-webkit-border-top-left-radius: 10px;
+		-webkit-border-top-right-radius: 10px;
+		-moz-border-radius-topleft: 10px;
+		-moz-border-radius-topright: 10px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	#content_title a{
+		color:silver;
+	}
+	.content_news{
+		margin-top: 40px;
+		margin-left: 15px;
+		margin-right: 15px;
+		border: 1px solid #333333;
+		background: #DDDDDD;
+	}
+		.content_news_title{
+			background: #8a8aae;
+			width: auto;
+			text-indent: 10px;
+			font-weight : bold;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			color: white;
+			border-bottom: 1px solid #333333;
+		}
+		.content_news_content{
+			padding-top: 4px;
+			padding-bottom: 4px;
+			padding-left: 10px;
+			padding-right: 10px;
+			margin-top: 5px; 
+			margin-bottom: 5px;
+		}
+	#footer_line{
+		position: absolute;
+		width: 100%;
+		height: 40px;
+		background-color:#8a8aae;
+		top: 100%;
+		border-top: 1px solid #000000;
+
+	}
+	#footer_content {
+		background: #62627b;
+	/* ombres */
+	-webkit-box-shadow: 0px 0px 3px 2px #9292ab;
+	box-shadow: 0px 0px 3px 2px #9292ab;		
+	}
+		#footer_content a{
+			position: relative;
+			display: inline-block; 
+			padding: 0;
+			text-align:center;
+			line-height: 36px;
+			margin-left: 2%;
+			margin-right: 1%;
+			text-decoration: none;
+			width: 30%;
+			height: 40px;
+			color:#cdcbc6;
+		}
+		#footer_content a:hover {
+			color:#cdcbc6;
+			font-weight:bold;
+			background-color:#8a8aae;
+		}
