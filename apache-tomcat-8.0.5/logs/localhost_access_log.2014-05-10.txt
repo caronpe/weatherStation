@@ -1,0 +1,9 @@
+127.0.0.1 - - [10/May/2014:00:02:36 +0200] "GET /vide/servlet/Voir HTTP/1.1" 200 823
+127.0.0.1 - - [10/May/2014:00:02:36 +0200] "GET /vide/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [10/May/2014:00:02:36 +0200] "GET /vide/img/pattern.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [10/May/2014:00:02:40 +0200] "GET /vide/servlet/Menu HTTP/1.1" 200 3536
+127.0.0.1 - - [10/May/2014:00:02:41 +0200] "GET /vide/servlet/Stats?time=1399560729&interval=month HTTP/1.1" 200 801
+127.0.0.1 - - [10/May/2014:00:02:58 +0200] "GET /vide/servlet/Images?time=1399560729 HTTP/1.1" 200 789
+127.0.0.1 - - [10/May/2014:00:04:54 +0200] "GET /vide/servlet/Images?time=1399560729 HTTP/1.1" 200 790
+127.0.0.1 - - [10/May/2014:00:04:54 +0200] "GET /vide/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [10/May/2014:00:04:54 +0200] "GET /vide/img/pattern.jpg HTTP/1.1" 304 -
