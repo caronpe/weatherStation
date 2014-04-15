@@ -6,6 +6,10 @@ import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Enumeration;
 	
 
@@ -32,11 +36,14 @@ import java.util.Enumeration;
 		private static final int TIME_OUT = 2000;
 		/** Default bits per second for COM port. */
 		private static final int DATA_RATE = 9600;
+		/** connection with mysql database*/
+		private Connection con;
+		private Statement stmt;
 
 		public void initialize() {
 	                // the next line is for Raspberry Pi and 
 	                // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-	                System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+	              //  System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
 
 			CommPortIdentifier portId = null;
 			Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -103,6 +110,33 @@ import java.util.Enumeration;
 				}
 			}
 			// Ignore all the other eventTypes, but you should consider the other ones.
+		}
+		
+		public void databaseConnection() throws SQLException{
+			try {
+				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection("jdbc:odbc:weather" , "station1" , "password");
+			stmt = con.createStatement();			
+		}
+		public void dataStorage(String sentence){
+			String[] temperature, humidity, light, noise, atmosphericPressure;
+			String[] data;
+			//put data in table, each case like "temperature:10"
+			data = sentence.split(";");
+			temperature = data[0].split(":");
+			humidity  = data[1].split(":");
+			light = data[2].split(":");
+			noise = data[3].split(":");
+			atmosphericPressure  = data[4].split(":");
+			//upload data in the mysqlDatabase
+			String query = "INSERT INTO weather ( " +temperature[0]+" , " +humidity[0]+ " , " + light[0] + " , " + noise[0] + " , " + atmosphericPressure[0]+ 
+					"VALUES ('" +temperature[1]+"' , '" +humidity[1]+ "' , '" + light[1] + "' , '" + noise[1] + "' , '" + atmosphericPressure[1]+ "')";
+				
+			
 		}
 
 		public static void main(String[] args) throws Exception {
