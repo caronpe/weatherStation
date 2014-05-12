@@ -1,12 +1,14 @@
-import java.awt.Color;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
-import org.jfree.chart.*;
-import org.jfree.data.general.Dataset;
-import org.jfree.data.statistics.*;
-import org.jfree.chart.plot.CategoryPlot;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.data.statistics.HistogramType;
 
  public class HistogrammeExample {
 	 

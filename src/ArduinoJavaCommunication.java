@@ -1,8 +1,10 @@
 
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -10,6 +12,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 	
 
@@ -43,7 +47,7 @@ import java.util.Enumeration;
 		public void initialize() throws SQLException {
 	                // the next line is for Raspberry Pi and 
 	                // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-	              //  System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+	         System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
 
 			CommPortIdentifier portId = null;
 			Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -84,7 +88,9 @@ import java.util.Enumeration;
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
+			//Create the database connection
 			this.databaseConnection();
+			System.out.println("connection activé");
 		}
 
 		/**
@@ -106,6 +112,7 @@ import java.util.Enumeration;
 				try {
 					String inputLine=input.readLine();
 					System.out.println(inputLine);
+					this.dataStorage(inputLine);
 				} catch (Exception e) {
 					System.err.println(e.toString());
 				}
@@ -115,12 +122,12 @@ import java.util.Enumeration;
 		
 		public void databaseConnection() throws SQLException{
 			try {
-				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			con = DriverManager.getConnection("jdbc:odbc:weather" , "station1" , "password");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb" , "plockyn" , "theo");
 			stmt = con.createStatement();			
 		}
 		
@@ -134,10 +141,15 @@ import java.util.Enumeration;
 			light = data[2].split(":");
 			noise = data[3].split(":");
 			atmosphericPressure  = data[4].split(":");
+			//date
+			SimpleDateFormat formater = null;
+			Date aujourdhui = new Date();
+			formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			//upload data in the mysqlDatabase
-			String query = "INSERT INTO weather ( " +temperature[0]+" , " +humidity[0]+ " , " + light[0] + " , " + noise[0] + " , " + atmosphericPressure[0]+ 
-					"VALUES ('" +temperature[1]+"' , '" +humidity[1]+ "' , '" + light[1] + "' , '" + noise[1] + "' , '" + atmosphericPressure[1]+ "')";
-				
+			String query = "INSERT INTO weather ( date , " +temperature[0]+" , " +humidity[0]+ " , " + light[0] + " , " + noise[0] + " , " + atmosphericPressure[0]+ 
+					") VALUES ('" +formater.format(aujourdhui)+"' , '"+temperature[1]+"' , '" +humidity[1]+ "' , '" + light[1] + "' , '" + noise[1] + "' , '" + "1055" + "')";
+			
+			System.out.println(query);
 			stmt.executeUpdate(query);
 		}
 

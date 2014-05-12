@@ -3,6 +3,7 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -140,7 +141,7 @@ import java.util.Enumeration;
 		}
 
 		public static void main(String[] args) throws Exception {
-			test main = new test();
+			test2 main = new test2();
 			main.initialize();
 			Thread t=new Thread() {
 				public void run() {
