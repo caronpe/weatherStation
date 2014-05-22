@@ -5,6 +5,7 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import histogram.Histogramme;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,6 +30,7 @@ import java.util.Enumeration;
 				"/dev/ttyUSB0", // Linux
 				"COM3", // Windows
 		};
+		
 		/**
 		* A BufferedReader which will be fed by a InputStreamReader 
 		* converting the bytes into characters 
@@ -117,6 +119,21 @@ import java.util.Enumeration;
 				} catch (Exception e) {
 					System.err.println(e.toString());
 				}
+				
+				try {
+					Histogramme.createHisto("temperature");
+					Histogramme.createHisto("humidity");
+					Histogramme.createHisto("light");
+					Histogramme.createHisto("noise");
+					Histogramme.createHisto("pressure");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				
 			}
 			// Ignore all the other eventTypes, but you should consider the other ones.
 		}

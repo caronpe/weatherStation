@@ -47,6 +47,6 @@ void loop(){
   String toStock = toStockT + toStockH + toStockL + toStockN +toStockP;
  Serial.println(toStock);
   toStock = "";
-  delay(2000);
+  delay(300000);
   
 }
