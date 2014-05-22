@@ -28,6 +28,10 @@ public class PosixTime {
 		break;
 		case "year" : tmpField = Calendar.YEAR;
 		break;
+		case "hour" : tmpField = Calendar.HOUR;
+		break;
+		case "minute" : tmpField = Calendar.MINUTE;
+		break;
 		default : break;
 		}
 		if(tmpField!=0)

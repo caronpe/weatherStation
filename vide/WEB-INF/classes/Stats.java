@@ -66,7 +66,7 @@ public class Stats extends HttpServlet{
 		c.setTimeInMillis(time*1000);
 		HTMLparser.header(out);
 		out.println("	<div id=\"content\">");
-		out.println( "<div id=\"content_title\">"+c.getDisplayName(GregorianCalendar.MONTH, GregorianCalendar.LONG, new Locale("en"))+"</div>" );     
+		out.println( "<div id=\"content_title\">"+this.getDate(time, interval)+"</div>" );     
 		out.println("<TABLE width=60% border=0>");
 		out.println("<TR>");
 		try{
@@ -97,6 +97,7 @@ public class Stats extends HttpServlet{
 
 		out.println("</TR>");
 		out.println("</TABLE>");
+		out.println("</div>");
 		HTMLparser.footer(out);
 
 
@@ -114,6 +115,22 @@ public class Stats extends HttpServlet{
 			}
 		}
 
+	}
+	
+	public String getDate(long time, String interval){
+		String date = "Stats for ";
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTimeInMillis(time*1000);
+		date+=c.get(GregorianCalendar.YEAR)+"";
+		if(!interval.equals("year")){
+			date+=", "+c.getDisplayName(GregorianCalendar.MONTH, Calendar.LONG, new Locale("en"))+"";
+			if(!interval.equals("month")){
+				date+=", week "+c.get(GregorianCalendar.WEEK_OF_YEAR);
+				if(!interval.equals("week"))
+					date+=", day "+c.get(GregorianCalendar.DAY_OF_MONTH);
+			}
+		}
+		return date;
 	}
 
 }

@@ -26,8 +26,8 @@ public class HTMLparser {
 		out.println("				<a href=\"/vide/servlet/Voir\">Home</a>");
 		out.println("				<a href=\"/vide/servlet/Menu\">Menu</a>");
 		out.println("			</div>");
-		*/out.println("		</div>");
-		out.println("	</div>");
+		out.println("		</div>");
+		out.println("	</div>");*/
 		out.println("</body>");
 		out.println("</html>");
 	}

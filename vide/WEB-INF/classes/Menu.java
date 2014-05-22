@@ -22,7 +22,7 @@ public class Menu extends HttpServlet{
 
 		Connection con=null;
 		Statement stmt=null;
-		int  n=0;
+		long  n=0;
 		PrintWriter out = null;
 		out = res.getWriter();
 		res.setContentType( "text/html" );
@@ -66,43 +66,37 @@ public class Menu extends HttpServlet{
 		try{
 			out.print("<div>");
 			while(rs.next()){
-				for(int i = 1; i<=taille; i++){
-					try{
-						n = rs.getInt("time");
-					}catch(SQLException e){
-						e.printStackTrace();
-					}
-					c.setTimeInMillis(n*1000);
-					if(c.get(GregorianCalendar.YEAR)!=year){
-						year = c.get(GregorianCalendar.YEAR);
-						out.print("</div>");
-						out.print("<div id=\"content\">");
-						out.print("<div id=\"content_title\"><a href=\"/vide/servlet/Stats?time="+n+"&interval=year\">Year "+year+"</a>");
-						out.print("</div>");
-					}
-					if(c.get(GregorianCalendar.MONTH)!=month){
-						month = c.get(GregorianCalendar.MONTH);
-						out.print("<p><h2>&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=month\">"+c.getDisplayName(GregorianCalendar.MONTH, GregorianCalendar.LONG, new Locale("en"))+"</a></h2></p>");
-					}
-					if(c.get(GregorianCalendar.WEEK_OF_YEAR)!=week){
-						week = c.get(GregorianCalendar.WEEK_OF_YEAR);
-						out.print("<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=week\">Week "+week+"</a></h3>");
-					}
-					if(c.get(GregorianCalendar.DAY_OF_MONTH)!=day){
-						day = c.get(GregorianCalendar.DAY_OF_MONTH);
-						out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=day\">"+day+"</a>");
-					}
-
+				try{
+					n = rs.getLong("time");
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+				c.setTimeInMillis(n*1000);
+				if(c.get(GregorianCalendar.YEAR)!=year){
+					year = c.get(GregorianCalendar.YEAR);
+					out.print("</div>");
+					out.print("<div id=\"content\">");
+					out.print("<div id=\"content_title\"><a href=\"/vide/servlet/Stats?time="+n+"&interval=year\">Year "+year+"</a>");
+					out.print("</div>");
+				}
+				if(c.get(GregorianCalendar.MONTH)!=month){
+					month = c.get(GregorianCalendar.MONTH);
+					out.print("<p><h2>&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=month\">"+c.getDisplayName(GregorianCalendar.MONTH, GregorianCalendar.LONG, new Locale("en"))+"</a></h2></p>");
+				}
+				if(c.get(GregorianCalendar.WEEK_OF_YEAR)!=week){
+					week = c.get(GregorianCalendar.WEEK_OF_YEAR);
+					out.print("<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=week\">Week "+week+"</a></h3>");
+				}
+				if(c.get(GregorianCalendar.DAY_OF_MONTH)!=day){
+					day = c.get(GregorianCalendar.DAY_OF_MONTH);
+					out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/vide/servlet/Stats?time="+n+"&interval=day\">"+day+"</a>");
 				}
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-
-
-		out.println("</TR>");
-		out.println("</TABLE>");
-
+		
+		out.println("</div>");
 		HTMLparser.footer(out);
 
 
