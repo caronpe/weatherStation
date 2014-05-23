@@ -21,13 +21,6 @@ public class HTMLparser {
 	}
 	
 	public static void footer(PrintWriter out){
-		/*out.println("		<div id=\"footer_line\">");
-		out.println("			<div id=\"footer_content\">");
-		out.println("				<a href=\"/vide/servlet/Voir\">Home</a>");
-		out.println("				<a href=\"/vide/servlet/Menu\">Menu</a>");
-		out.println("			</div>");
-		out.println("		</div>");
-		out.println("	</div>");*/
 		out.println("</body>");
 		out.println("</html>");
 	}

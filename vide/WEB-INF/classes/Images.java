@@ -24,28 +24,44 @@ public class Images extends HttpServlet{
 		out = res.getWriter();
 		res.setContentType( "text/html" );
 
-
+		// Recuperation de l'image la plus proche
 		long time = Integer.valueOf(req.getParameter("time"));
 		time = Voir.getImage(time);
 		
+		// Header
 		HTMLparser.header(out);
+		
+		// Content
 		out.println("	<div id=\"content\">");
 		out.println( "<div id=\"content_title\"> Image from "+PosixTime.convertPosix(time)+"</div>" );
+		// Navigation
 		out.println("<TABLE width=100% border=0>");
 		out.println("<TR>");
+		// Annee --
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "year", -1)+"\"><< Year</a></TD>");
+		// Mois --
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "month", -1)+"\"><< Month</a></TD>");
+		// Semaine --
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "week", -1)+"\"><< Week</a></TD>");
+		// Jour --
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "day", -1)+"\"><< Day</a></TD>");
-		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", -1)+"\"><</a> <a href=\"/vide/servlet/Image?time="+PosixTime.addIntervalPosix(time, "minute", 1)+"\">></a> </TD>");
+		// Minute -- et ++
+		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", -1)+"\"><</a> <a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", 1)+"\">></a> </TD>");
+		// Jour ++
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "day", 1)+"\">Day >></a></TD>");
+		// Semaine ++
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "week", 1)+"\">Week >></a></TD>");
+		// Mois ++
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "month", 1)+"\">Month >></a></TD>");
+		// Annee ++
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "year", 1)+"\">Year >></a></TD>");
 		out.println("</TR>");
 		out.println("</TABLE>");
+		
+		// Image
 		out.println("<center><img src=\"/vide/snapshots/img-"+time+".jpg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></center>");
 		out.println("</div>");
+		// Footer
 		HTMLparser.footer(out);
 		
 	}

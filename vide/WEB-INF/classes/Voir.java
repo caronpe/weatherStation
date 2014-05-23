@@ -26,15 +26,16 @@ public class Voir extends HttpServlet{
 		PrintWriter out = null;
 		out = res.getWriter();
 		res.setContentType( "text/html" );
+		// Autorefresh par 5 minutes
 		res.addHeader("Refresh", ""+5*60);
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			//Class.forName("java.sql.Driver");
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
 		// connexion a la base
+		// A CHANGER POUR CHAQUE PORTAGE
 		String url = "jdbc:mysql://localhost/WeatherStation";
 		String nom = "root";
 		String mdp = "toto";
@@ -48,6 +49,7 @@ public class Voir extends HttpServlet{
 		}
 		query = "select * from "+table+" where time >= all(select time from data)";
 		int taille = 0;
+		// Execution de la requete
 		ResultSetMetaData rsmd =null;
 		ResultSet rs = null;
 		try{
@@ -60,18 +62,22 @@ public class Voir extends HttpServlet{
 		}
 
 		long time = 0;
+		
+		// Header
 		HTMLparser.header(out);
 		out.println("	<div id=\"content\">");
 		try{
 			time = rs.getInt("time");
-			out.println("<div id=\"content_title\">"+PosixTime.convertPosix((long)rs.getInt("time"))+"</div>" );
+			out.println("<div id=\"content_title\">"+PosixTime.convertPosix(time)+"</div>" );
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		
+		// Content
 		out.println("<TABLE width=100% border=0>");
 		out.println("<TR>");
-		try{
+		try{	
+			// Titres de colonnes
 			for(int i = 1; i<=taille; i++){
 				if(!((rsmd.getColumnName(i).equals("time"))))
 					out.print("<TD><b>"+rsmd.getColumnName(i)+"</b></TD>");
@@ -85,6 +91,7 @@ public class Voir extends HttpServlet{
 
 		for(int i = 1; i<=taille; i++){
 			try{
+				// Contenu de colonnes
 				if(!((rsmd.getColumnName(i).equals("time")))){
 					n = rs.getString(rsmd.getColumnName(i));
 					out.print("<TD>"+n.trim()+"</TD>");
@@ -94,34 +101,31 @@ public class Voir extends HttpServlet{
 			}
 		}
 
-
+		// Recuperation de l'image la plus proche de la date
 		time = Voir.getImage(time);
 		out.println("</TR>");
 		out.println("</TABLE>");
+		// Affichage de l'image
 		out.println("<center><a href=\"/vide/servlet/Images?time="+time+"\"><img src=\"/vide/snapshots/img-"+time+".jpg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></a></center>");
 		out.println("</div>");
 		
+		// Footer
 		HTMLparser.footer(out);
 		
 
 
-
+		// Deconnexion de la bdd
 		try{
 			stmt.close();
 			con.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		/*try {
-			Thread.sleep(60000L);
-			res.sendRedirect("/vide/servlet/Voir");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		
 	}
 
+
+	// Renvoie le temps unix de l'image la plus proche du temps entre en parametre
 	public static long getImage(long time){
 		String path = "/home/thor/WeatherStation/apache-tomcat-8.0.5/webapps/vide/snapshots/";
 	

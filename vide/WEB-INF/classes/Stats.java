@@ -34,6 +34,7 @@ public class Stats extends HttpServlet{
 			e.printStackTrace();
 		}
 		// connexion a la base
+		// A CHANGER POUR CHAQUE PORTAGE SUR UNE AUTRE BASE
 		String url = "jdbc:mysql://localhost:3306/WeatherStation";
 		String nom = "root";
 		String mdp = "toto";
@@ -45,10 +46,14 @@ public class Stats extends HttpServlet{
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		
+		// Recuperation des parametres
 		long time = Integer.valueOf(req.getParameter("time"));
 		String interval = req.getParameter("interval");
+		// A CHANGER POUR CHAQUE NOUVELLE BDD
 		query = "select avg(time) as time, avg(temperature) as temperature, avg(hydrometrie) as hydrometrie, avg(luminosite) as luminosite, avg(pression) as pression, avg(sound) as sound from "+table+" where time >= "+time+" and time <= "+PosixTime.addIntervalPosix(time,interval)+"";
 		int taille = 0;
+		// Execution de la requete
 		ResultSetMetaData rsmd =null;
 		ResultSet rs = null;
 		try{
@@ -61,17 +66,18 @@ public class Stats extends HttpServlet{
 		}
 
 
-
-		GregorianCalendar c = new GregorianCalendar();
-		c.setTimeInMillis(time*1000);
+		// Header
 		HTMLparser.header(out);
-		out.println("	<div id=\"content\">");
-		out.println( "<div id=\"content_title\">"+this.getDate(time, interval)+"</div>" );     
+		
+		// Content
+		out.println("<div id=\"content\">");
+		out.println("<div id=\"content_title\">"+this.getDate(time, interval)+"</div>");     
 		out.println("<TABLE width=60% border=0>");
 		out.println("<TR>");
 		try{
 			for(int i = 2; i<=taille; i++){
-				out.print("<TH>"+rsmd.getColumnName(i)+"</TH>");
+				// Noms de colonnes
+				out.print("<TD><b>"+rsmd.getColumnName(i)+"</b></TD>");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -79,6 +85,8 @@ public class Stats extends HttpServlet{
 
 		out.println("</TR>");
 		out.println("<TR>");
+		
+		// Contenu des colonnes
 		for(int i = 2; i<=taille; i++){
 			if((i-1)%taille==0){
 				out.println("</TR>");
@@ -98,10 +106,11 @@ public class Stats extends HttpServlet{
 		out.println("</TR>");
 		out.println("</TABLE>");
 		out.println("</div>");
+		// Footer
 		HTMLparser.footer(out);
 
 
-
+		// Deconnexion a la bdd
 		try{
 			stmt.close();
 		}catch(SQLException e){
@@ -117,6 +126,7 @@ public class Stats extends HttpServlet{
 
 	}
 	
+	// Renvoie la date en fonction de l'intervalle choisi
 	public String getDate(long time, String interval){
 		String date = "Stats for ";
 		GregorianCalendar c = new GregorianCalendar();
