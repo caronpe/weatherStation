@@ -19,21 +19,25 @@ public class PosixTime {
 		Calendar tmp = new GregorianCalendar();
 		int tmpField = 0;
 		tmp.setTimeInMillis(posix*1000);
-		switch (field){
-		case "day" : tmpField = Calendar.DAY_OF_MONTH;
-		break;
-		case "week" : tmpField = Calendar.WEEK_OF_YEAR;
-		break;
-		case "month" : tmpField = Calendar.MONTH;
-		break;
-		case "year" : tmpField = Calendar.YEAR;
-		break;
-		case "hour" : tmpField = Calendar.HOUR;
-		break;
-		case "minute" : tmpField = Calendar.MINUTE;
-		break;
-		default : break;
+		if(field.equals("day")){
+			tmpField = Calendar.DAY_OF_MONTH;
 		}
+		if(field.equals("week")){
+			tmpField = Calendar.WEEK_OF_YEAR;
+		}
+		if(field.equals("month")){
+			tmpField = Calendar.MONTH;
+		}
+		if(field.equals("year")){
+			tmpField = Calendar.YEAR;
+		}
+		if(field.equals("hour")){
+			tmpField = Calendar.HOUR;
+		}
+		if(field.equals("minute")){
+			tmpField = Calendar.MINUTE;
+		}
+		
 		if(tmpField!=0)
 			tmp.add(tmpField, interval);
 		return tmp.getTime();
