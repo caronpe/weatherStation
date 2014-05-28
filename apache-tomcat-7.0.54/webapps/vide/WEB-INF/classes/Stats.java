@@ -36,8 +36,8 @@ public class Stats extends HttpServlet{
 		// connexion a la base
 		// A CHANGER POUR CHAQUE PORTAGE SUR UNE AUTRE BASE
 		String url = "jdbc:mysql://localhost:3306/mydb";
-		String nom = "plockyn";
-		String mdp = "theo";
+		String nom = "weatherStation1";
+		String mdp = "weather";
 		String table = "weather";
 		String query = "";
 		try{
