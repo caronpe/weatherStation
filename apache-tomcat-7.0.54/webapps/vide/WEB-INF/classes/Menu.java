@@ -35,10 +35,10 @@ public class Menu extends HttpServlet{
 		}
 		// connexion a la base
 		// A CHANGER POUR CHAQUE PORTAGE SUR UNE AUTRE BASE
-		String url = "jdbc:mysql://localhost:3306/WeatherStation";
-		String nom = "root";
-		String mdp = "toto";
-		String table = "data";
+		String url = "jdbc:mysql://localhost:3306/mydb";
+		String nom = "plockyn";
+		String mdp = "theo";
+		String table = "weather";
 		String query = "";
 		try{
 			con = DriverManager.getConnection(url,nom,mdp);
@@ -47,7 +47,7 @@ public class Menu extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		query = "select time from "+table+" order by time ASC";
+		query = "select date from "+table+" order by date ASC";
 		int taille = 0;
 		// Execution de la requete
 		ResultSetMetaData rsmd =null;
@@ -71,7 +71,7 @@ public class Menu extends HttpServlet{
 			out.print("<div>"); // Permet de ne pas faire de bug par rapport a la generation des annees
 			while(rs.next()){
 				try{
-					n = rs.getLong("time");
+					n = rs.getLong("date");
 				}catch(SQLException e){
 					e.printStackTrace();
 				}
