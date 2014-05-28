@@ -36,10 +36,10 @@ public class Voir extends HttpServlet{
 		}
 		// connexion a la base
 		// A CHANGER POUR CHAQUE PORTAGE
-		String url = "jdbc:mysql://localhost/WeatherStation";
-		String nom = "root";
-		String mdp = "toto";
-		String table = "data";
+		String url = "jdbc:mysql://localhost/mydb";
+		String nom = "plockyn";
+		String mdp = "theo";
+		String table = "weather";
 		String query = "";
 		try{
 			con = DriverManager.getConnection(url,nom,mdp);
@@ -47,7 +47,7 @@ public class Voir extends HttpServlet{
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		query = "select * from "+table+" where time >= all(select time from data)";
+		query = "select * from "+table+" where date >= all(select date from "+table+")";
 		int taille = 0;
 		// Execution de la requete
 		ResultSetMetaData rsmd =null;
@@ -67,7 +67,7 @@ public class Voir extends HttpServlet{
 		HTMLparser.header(out);
 		out.println("	<div id=\"content\">");
 		try{
-			time = rs.getInt("time");
+			time = rs.getInt("date");
 			out.println("<div id=\"content_title\">"+PosixTime.convertPosix(time)+"</div>" );
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class Voir extends HttpServlet{
 		try{	
 			// Titres de colonnes
 			for(int i = 1; i<=taille; i++){
-				if(!((rsmd.getColumnName(i).equals("time"))))
+				if(!((rsmd.getColumnName(i).equals("date"))))
 					out.print("<TD><b>"+rsmd.getColumnName(i)+"</b></TD>");
 			}
 		}catch(SQLException e){
@@ -92,7 +92,7 @@ public class Voir extends HttpServlet{
 		for(int i = 1; i<=taille; i++){
 			try{
 				// Contenu de colonnes
-				if(!((rsmd.getColumnName(i).equals("time")))){
+				if(!((rsmd.getColumnName(i).equals("date")))){
 					n = rs.getString(rsmd.getColumnName(i));
 					out.print("<TD>"+n.trim()+"</TD>");
 				}
@@ -127,7 +127,8 @@ public class Voir extends HttpServlet{
 
 	// Renvoie le temps unix de l'image la plus proche du temps entre en parametre
 	public static long getImage(long time){
-		String path = "/home/thor/WeatherStation/apache-tomcat-8.0.5/webapps/vide/snapshots/";
+		String path = "/home/pi/Document/weatherStation/apache-tomcat-7.0.54/webapps/vide/snapshots/";
+		//"/home/thor/WeatherStation/apache-tomcat-8.0.5/webapps/vide/snapshots/";
 	
 		File img = new File(path+"img-"+time+".jpg");
 		if(img.exists()){
