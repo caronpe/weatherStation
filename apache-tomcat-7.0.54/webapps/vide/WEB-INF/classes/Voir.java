@@ -37,8 +37,8 @@ public class Voir extends HttpServlet{
 		// connexion a la base
 		// A CHANGER POUR CHAQUE PORTAGE
 		String url = "jdbc:mysql://localhost/mydb";
-		String nom = "plockyn";
-		String mdp = "theo";
+		String nom = "weatherStation1";
+		String mdp = "weather";
 		String table = "weather";
 		String query = "";
 		try{
