@@ -16,7 +16,7 @@ public class Histogramme {
 		String query = "SELECT date, "+ variable +  " from weather where (select DATE(date)) = CURDATE() ORDER BY date ASC;";
 		JDBCCategoryDataset dataset = new JDBCCategoryDataset(
 				"jdbc:mysql://localhost:3306/mydb", "com.mysql.jdbc.Driver",
-				"plockyn", "theo");
+				"weatherStation1", "weather");
 
 		dataset.executeQuery(query);
 		JFreeChart chart = ChartFactory.createLineChart("Test", "date", variable,
@@ -28,7 +28,7 @@ public class Histogramme {
 	        ChartUtilities.saveChartAsPNG(new File(variable+".PNG"), chart, width, height);
 	        } catch (IOException e) {}
        
-		System.out.println("Histogram done");
+		System.out.println("Histogram "+ variable + " done");
 		dataset.clear();
 		}
 

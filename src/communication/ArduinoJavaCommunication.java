@@ -15,8 +15,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 	
 
 
@@ -145,7 +147,7 @@ import java.util.Enumeration;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb" , "plockyn" , "theo");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb" , "weatherStation1" , "weather");
 			stmt = con.createStatement();			
 		}
 		

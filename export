@@ -1,0 +1,1 @@
+export CLASSPATH=/home/pi/Document/weatherStation/apache-tomcat-7.0.54/lib/servlet-api.jar:/home/pi/Document/weatherStation/apache-tomcat-7.0.54/lib/commons-lang3-3.3.2.jar:/home/pi/Document/weatherStation/apache-tomcat-7.0.54/lib/mysql-connector-java-5.1.30-bin.jar
