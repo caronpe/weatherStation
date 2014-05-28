@@ -159,16 +159,23 @@ import java.util.Enumeration;
 			light = data[2].split(":");
 			noise = data[3].split(":");
 			atmosphericPressure  = data[4].split(":");
+			
 			//date
-			SimpleDateFormat formater = null;
-			Date aujourdhui = new Date();
-			formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date today = new Date();
+		
 			//upload data in the mysqlDatabase
 			String query = "INSERT INTO weather ( date , " +temperature[0]+" , " +humidity[0]+ " , " + light[0] + " , " + noise[0] + " , " + atmosphericPressure[0]+ 
-					") VALUES ('" +formater.format(aujourdhui)+"' , '"+temperature[1]+"' , '" +humidity[1]+ "' , '" + light[1] + "' , '" + noise[1] + "' , '" + "1055" + "')";
+					") VALUES ('" + convertDate(today)+"' , '"+temperature[1]+"' , '" +humidity[1]+ "' , '" + light[1] + "' , '" + noise[1] + "' , '" + "1055" + "')";
 			
 			System.out.println(query);
 			stmt.executeUpdate(query);
+		}
+		
+		//put the date to a UNIX date format
+		public static long convertDate(java.util.Date date){
+			Calendar tmp = new GregorianCalendar();
+			tmp.setTime(date);
+			return tmp.getTimeInMillis()/1000;
 		}
 
 		public static void main(String[] args) throws Exception {
