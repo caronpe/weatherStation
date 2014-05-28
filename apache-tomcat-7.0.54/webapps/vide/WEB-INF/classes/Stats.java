@@ -35,10 +35,10 @@ public class Stats extends HttpServlet{
 		}
 		// connexion a la base
 		// A CHANGER POUR CHAQUE PORTAGE SUR UNE AUTRE BASE
-		String url = "jdbc:mysql://localhost:3306/WeatherStation";
-		String nom = "root";
-		String mdp = "toto";
-		String table = "data";
+		String url = "jdbc:mysql://localhost:3306/mydb";
+		String nom = "plockyn";
+		String mdp = "theo";
+		String table = "weather";
 		String query = "";
 		try{
 			con = DriverManager.getConnection(url,nom,mdp);
@@ -51,7 +51,7 @@ public class Stats extends HttpServlet{
 		long time = Integer.valueOf(req.getParameter("time"));
 		String interval = req.getParameter("interval");
 		// A CHANGER POUR CHAQUE NOUVELLE BDD
-		query = "select avg(time) as time, avg(temperature) as temperature, avg(hydrometrie) as hydrometrie, avg(luminosite) as luminosite, avg(pression) as pression, avg(sound) as sound from "+table+" where time >= "+time+" and time <= "+PosixTime.addIntervalPosix(time,interval)+"";
+		query = "select avg(date) as date, avg(temperature) as temperature, avg(humidity) as humidity, avg(light) as light, avg(pressure) as pressure, avg(noise) as noise from "+table+" where date >= "+time+" and date <= "+PosixTime.addIntervalPosix(time,interval)+"";
 		int taille = 0;
 		// Execution de la requete
 		ResultSetMetaData rsmd =null;
