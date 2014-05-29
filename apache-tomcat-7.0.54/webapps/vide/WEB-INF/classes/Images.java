@@ -59,7 +59,7 @@ public class Images extends HttpServlet{
 		out.println("</TABLE>");
 		
 		// Image
-		out.println("<center><img src=\"/vide/snapshots/img-"+time+".jpg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></center>");
+		out.println("<center><img src=\"/vide/snapshots/timestamp-"+time+".jpeg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></center>");
 		out.println("</div>");
 		// Footer
 		HTMLparser.footer(out);
