@@ -1,0 +1,8 @@
+10.42.0.1 - - [29/May/2014:14:01:53 +0100] "GET /vide/servlet/Voir HTTP/1.1" 200 1000
+10.42.0.1 - - [29/May/2014:14:01:54 +0100] "GET /vide/css/style.css HTTP/1.1" 304 -
+10.42.0.1 - - [29/May/2014:14:01:54 +0100] "GET /vide/snapshots/img-1401285312.jpg HTTP/1.1" 404 1017
+10.42.0.1 - - [29/May/2014:14:01:54 +0100] "GET /vide/img/pattern.jpg HTTP/1.1" 304 -
+10.42.0.1 - - [29/May/2014:14:06:57 +0100] "GET /vide/servlet/Voir HTTP/1.1" 200 1000
+10.42.0.1 - - [29/May/2014:14:06:57 +0100] "GET /vide/css/style.css HTTP/1.1" 304 -
+10.42.0.1 - - [29/May/2014:14:06:57 +0100] "GET /vide/snapshots/img-1401368568.jpg HTTP/1.1" 404 1017
+10.42.0.1 - - [29/May/2014:14:06:57 +0100] "GET /vide/img/pattern.jpg HTTP/1.1" 304 -
