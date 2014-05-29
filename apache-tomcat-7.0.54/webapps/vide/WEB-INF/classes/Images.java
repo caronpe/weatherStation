@@ -46,7 +46,7 @@ public class Images extends HttpServlet{
 		// Jour --
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "day", -1)+"\"><< Day</a></TD>");
 		// Minute -- et ++
-		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", -1)+"\"><</a> <a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", 1)+"\">></a> </TD>");
+		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", -5)+"\"><</a> <a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "minute", 5)+"\">></a> </TD>");
 		// Jour ++
 		out.println("	<TD><a href=\"/vide/servlet/Images?time="+PosixTime.addIntervalPosix(time, "day", 1)+"\">Day >></a></TD>");
 		// Semaine ++
