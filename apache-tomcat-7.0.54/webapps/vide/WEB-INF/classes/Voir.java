@@ -106,7 +106,7 @@ public class Voir extends HttpServlet{
 		out.println("</TR>");
 		out.println("</TABLE>");
 		// Affichage de l'image
-		out.println("<center><a href=\"/vide/servlet/Images?time="+time+"\"><img src=\"/vide/snapshots/img-"+time+".jpg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></a></center>");
+		out.println("<center><a href=\"/vide/servlet/Images?time="+time+"\"><img src=\"/vide/snapshots/timestamp-"+time+".jpeg\" alt=\"Image not found\" height=\"600\" width=\"800\"></img></a></center>");
 		out.println("</div>");
 		
 		// Footer
