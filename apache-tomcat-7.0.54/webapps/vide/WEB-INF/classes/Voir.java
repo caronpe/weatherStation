@@ -130,7 +130,7 @@ public class Voir extends HttpServlet{
 		String path = "/home/pi/Document/weatherStation/apache-tomcat-7.0.54/webapps/vide/snapshots/";
 		//"/home/thor/WeatherStation/apache-tomcat-8.0.5/webapps/vide/snapshots/";
 	
-		File img = new File(path+"img-"+time+".jpg");
+		File img = new File(path+"timestamp-"+time+".jpeg");
 		if(img.exists()){
 			return time;
 		}
@@ -138,7 +138,7 @@ public class Voir extends HttpServlet{
 		long old = time;
 		while(!img.exists() && cpt < 200){
 			time = time+1;
-			img = new File(path+"img-"+time+".jpg");
+			img = new File(path+"timestamp-"+time+".jpeg");
 			cpt++;
 		}
 		if(cpt==200){
@@ -146,7 +146,7 @@ public class Voir extends HttpServlet{
 			cpt = 0;
 			while(!img.exists() && cpt < 200){
 				time = time-1;
-				img = new File(path+"img-"+time+".jpg");
+				img = new File(path+"timestamp-"+time+".jpeg");
 				cpt++;
 			}
 		}
