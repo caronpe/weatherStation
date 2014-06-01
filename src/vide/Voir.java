@@ -1,3 +1,5 @@
+package vide;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -35,10 +37,10 @@ public class Voir extends HttpServlet{
 			e.printStackTrace();
 		}
 		// connexion a la base
-		String url = "jdbc:mysql://localhost/WeatherStation";
-		String nom = "root";
-		String mdp = "toto";
-		String table = "data";
+		String url = "jdbc:mysql://localhost:3306/mydb";
+		String nom = "plockyn";
+		String mdp = "theo";
+		String table = "weather";
 		String query = "";
 		try{
 			con = DriverManager.getConnection(url,nom,mdp);
