@@ -16,7 +16,9 @@ void setup(){
 void loop(){
   //temperature
   int tempVal = analogRead(tempPin);
+  //converte value to voltage
   float voltage = (tempVal/1024.0) * 5.0;
+  //converte voltage to temperature
   float temperature =  (voltage - 0.5) * 100;
   delay(5);
   //light
